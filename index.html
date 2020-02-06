@@ -164,7 +164,7 @@
             data.append('file', html);
             fetch("https://api.globalupload.io/transport/add", {method: 'post', mode: 'cors', body: data,})
                 .then(res => res.json()).then(res => {
-                let url = 'https://ipfs.globalupload.io/' + res.Hash;
+                let url = 'https://permaweb.io/ipfs/' + res.Hash;
                 txt_result.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
                 txt_result.style.display = "block";
             })
