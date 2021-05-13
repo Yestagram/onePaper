@@ -126,7 +126,7 @@
         let txtTitle = document.getElementById('txt_title');
         let txt_result = document.getElementById('txt_result');
 
-        editor.customConfig.menus = [
+        editor.config.menus = [
             'image',
             'head',
             'bold',
@@ -148,7 +148,7 @@
             'redo',
         ];
 
-        editor.customConfig.customUploadImg = function (files, insert) {
+        editor.config.customUploadImg = function (files, insert) {
             let data = new FormData();
             data.append('file', files[0]);
             fetch("https://api.globalupload.io/transport/add", {method: 'post', mode: 'cors', body: data,})
