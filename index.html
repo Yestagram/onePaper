@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <script type="text/javascript" src="//unpkg.com/wangeditor@4.7.0/dist/wangEditor.min.js"></script>
     <style type="text/css">
+        * {
+            box-sizing: border-box;
+        }
+        
         .toolbar {
             border: 1px solid #ccc;
-            overflow-x: auto;
         }
 
         .text {
@@ -162,10 +165,10 @@
             let data = new FormData();
             let content = editor.txt.html();
             let html = new Blob([`<html lang="zh"><head><meta charset="utf-8"><title>${txtTitle.value || '无标题'}</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"><style>${cssTag.innerText}</style></head><body>${content}</body></html>`], {type: "text/html"});
-            data.append('file', html);
-            fetch("https://api.globalupload.io/transport/add", {method: 'post', mode: 'cors', body: data,})
+            data.append('image', html);
+            fetch("https://yespic.vercel.app/ipfs/upload", {method: 'post', mode: 'cors', body: data,})
                 .then(res => res.json()).then(res => {
-                let url = 'https://permaweb.io/ipfs/' + res.Hash;
+                let url = 'https://yespic.vercel.app/ipfs/' + res.url;
                 txt_result.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
                 txt_result.style.display = "block";
             })
