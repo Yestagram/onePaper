@@ -164,9 +164,9 @@
         btnPublish.addEventListener('click', _ => {
             let data = new FormData();
             let content = editor.txt.html();
-            let html = new Blob([`<html lang="zh"><head><meta charset="utf-8"><title>${txtTitle.value || '无标题'}</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"><style>${cssTag.innerText}</style></head><body>${content}</body></html>`], {type: "text/html"});
-            data.append('image', html);
-            fetch("https://yespic.vercel.app/ipfs/upload", {method: 'post', mode: 'cors', body: data,})
+            let html = `<html lang="zh"><head><meta charset="utf-8"><title>${txtTitle.value || '无标题'}</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"><style>${cssTag.innerText}</style></head><body>${content}</body></html>`;
+            data.append('content', html);
+            fetch("https://yespic.vercel.app/ipfs/write", {method: 'post', mode: 'cors', body: data,})
                 .then(res => res.json()).then(res => {
                 let url = 'https://yespic.vercel.app' + res.url;
                 txt_result.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
