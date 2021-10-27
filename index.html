@@ -153,10 +153,10 @@
 
         editor.config.customUploadImg = function (files, insert) {
             let data = new FormData();
-            data.append('file', files[0]);
-            fetch("https://api.globalupload.io/transport/add", {method: 'post', mode: 'cors', body: data,})
+            data.append('image', files[0]);
+            fetch("https://yespic.vercel.app/ipfs/upload", {method: 'post', mode: 'cors', body: data,})
                 .then(res => res.json()).then(res => {
-                insert('https://ipfs.globalupload.io/' + res.Hash);
+                insert('https://yespic.vercel.app' + res.url);
             })
         };
         editor.create();
@@ -168,7 +168,7 @@
             data.append('image', html);
             fetch("https://yespic.vercel.app/ipfs/upload", {method: 'post', mode: 'cors', body: data,})
                 .then(res => res.json()).then(res => {
-                let url = 'https://yespic.vercel.app/ipfs/' + res.url;
+                let url = 'https://yespic.vercel.app' + res.url;
                 txt_result.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
                 txt_result.style.display = "block";
             })
